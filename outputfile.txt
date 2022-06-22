@@ -1,1 +1,0 @@
-input text to be written in output stream
