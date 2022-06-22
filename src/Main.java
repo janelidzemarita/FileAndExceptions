@@ -33,9 +33,11 @@ public class Main {
 								System.out.println("In " + directoryItems.getName() + " | "
 										+ directoryItemsAgain.getName() + " - Directory");
 								/*
-								 * Quote from task 1 მასში არსებულ ყველა ფაილისა და ფოლდერის სახელს
+								 * Quote from task 1 áƒ›áƒ�áƒ¡áƒ¨áƒ˜ áƒ�áƒ áƒ¡áƒ”áƒ‘áƒ£áƒš áƒ§áƒ•áƒ”áƒšáƒ�
+								 * áƒ¤áƒ�áƒ˜áƒšáƒ˜áƒ¡áƒ� áƒ“áƒ� áƒ¤áƒ�áƒšáƒ“áƒ”áƒ áƒ˜áƒ¡ áƒ¡áƒ�áƒ®áƒ”áƒšáƒ¡
 								 * 
-								 * ყველას მისამართი უნდა დაიბეჭდოს
+								 * áƒ§áƒ•áƒ”áƒšáƒ�áƒ¡ áƒ›áƒ˜áƒ¡áƒ�áƒ›áƒ�áƒ áƒ—áƒ˜ áƒ£áƒœáƒ“áƒ�
+								 * áƒ“áƒ�áƒ˜áƒ‘áƒ”áƒ­áƒ“áƒ�áƒ¡
 								 * 
 								 * Here I used .getName to print the name of files and directories We can change
 								 * it to .getAbsolutePath() or .getPath() or .getCanonicalPath() to print the
@@ -129,7 +131,6 @@ public class Main {
 
 			fos = new FileOutputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\RevFileText");
 			fos.write(revBytes);
-			fos.toString();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + e);
 		} catch (IOException ioe) {
@@ -147,14 +148,14 @@ public class Main {
 	}
 
 	public static void CopyToFile(BufferedInputStream fis) {
-		OutputStream fos = null;
+		BufferedOutputStream fos = null;
 		try {
 			byte[] bytes = new byte[3];
 			fos = new BufferedOutputStream(new FileOutputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\CopiedText"));
 			while (fis.available() > 0) {
-				fos.write(fis.readNBytes(3));
+				bytes = fis.readNBytes(3);
+				fos.write(bytes);
 			}
-			fos.toString();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + e);
 		} catch (IOException ioe) {
