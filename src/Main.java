@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 
 public class Main {
 
@@ -16,7 +15,7 @@ public class Main {
 		File currentDirectory = new File(args[0]);
 		ReverseFileBuffered(); // Task 3
 		ReverseFileNotBuffered();
-		
+
 		// Task 1.
 		if (currentDirectory.isDirectory() && currentDirectory.exists()) {
 			String[] files = currentDirectory.list();
@@ -69,7 +68,8 @@ public class Main {
 				}
 			}
 		}
-		BufferedInputStream s = new BufferedInputStream(new FileInputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\ReadMyFile"));
+		BufferedInputStream s = new BufferedInputStream(
+				new FileInputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\ReadMyFile"));
 		CopyToFile(s);
 	}
 
@@ -88,31 +88,34 @@ public class Main {
 		InputStream fis = null;
 		OutputStream fos = null;
 		try {
-			 fis = new BufferedInputStream(new FileInputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\ReadMyFile"));
+			fis = new BufferedInputStream(new FileInputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\ReadMyFile"));
 			byte[] bytes = fis.readAllBytes();
 			byte[] revBytes = new byte[bytes.length];
 
 			for (int i = 0; i < bytes.length; i++) {
 				revBytes[bytes.length - 1 - i] = bytes[i];
 			}
-			fos = new BufferedOutputStream( new FileOutputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\RevFileText"));
+			fos = new BufferedOutputStream(
+					new FileOutputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\RevFileText"));
 			fos.write(revBytes);
 			fos.toString();
-		}catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + e);
-		}catch (IOException ioe) {
-            System.out.println("I/O Exception: " + ioe);
-        }finally {
-        	if(fis != null && fos != null) {
-        		try { 
-        			fis.close();
-        			fos.close();
-        		} catch (IOException e) {}
-        	}
-        	
-        }
+		} catch (IOException ioe) {
+			System.out.println("I/O Exception: " + ioe);
+		} finally {
+			if (fis != null && fos != null) {
+				try {
+					fis.close();
+					fos.close();
+				} catch (IOException e) {
+				}
+			}
+
+		}
 	}
-	public static void ReverseFileNotBuffered() throws IOException {
+
+	public static void ReverseFileNotBuffered() {
 		InputStream fis = null;
 		OutputStream fos = null;
 		try {
@@ -123,31 +126,31 @@ public class Main {
 			for (int i = 0; i < bytes.length; i++) {
 				revBytes[bytes.length - 1 - i] = bytes[i];
 			}
-			
+
 			fos = new FileOutputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\RevFileText");
 			fos.write(revBytes);
 			fos.toString();
-		}catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + e);
-		}catch (IOException ioe) {
-            System.out.println("I/O Exception: " + ioe);
-        }finally {
-        	if(fis != null && fos != null) {
-        		try { 
-        			fis.close();
-        			fos.close();
-        		} catch (IOException e) {}
-        	}
-        	
-        }
+		} catch (IOException ioe) {
+			System.out.println("I/O Exception: " + ioe);
+		} finally {
+			if (fis != null && fos != null) {
+				try {
+					fis.close();
+					fos.close();
+				} catch (IOException e) {
+				}
+			}
+
+		}
 	}
 
-public static void CopyToFile(BufferedInputStream fis) {
+	public static void CopyToFile(BufferedInputStream fis) {
 		OutputStream fos = null;
 		try {
 			byte[] bytes = new byte[3];
 			fos = new BufferedOutputStream(new FileOutputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\CopiedText"));
-//			fis.read()!= -1
 			while (fis.available() > 0) {
 				fos.write(fis.readNBytes(3));
 			}
@@ -164,6 +167,7 @@ public static void CopyToFile(BufferedInputStream fis) {
 				} catch (IOException e) {
 				}
 			}
+
 		}
 	}
 }
