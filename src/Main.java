@@ -141,36 +141,29 @@ public class Main {
         	
         }
 	}
-	/*
-	 6.  დაწერეთ პროგრამა, რომელიც საწყისი შემავალი ფაილიდან ამოიკითხავს ბაიტებს
-	 და ამ ინფორმაციას გადააკოპირებს ახალ გამომავალ ფაილში. 
-	 ანუ პროგრამის  დასრულების შემდეგ შემავალი ფაილის შიგთავსი უნდა 
-	 გადაკოპირდეს გამომავალ  ფაილის შიგთავსში. პროცესი აუცილებლად უნდა იყოს ბუფერიზებული 
-	 და მყარ  დისკზე გადატანა გამომავალ ფაილში უნდა ხდებოდეს შემავალი ფაილიდან ყოველი 3  ბაიტის ამოკითხვის შემდეგ. 
-	 ანუ ყოველი 3 ბაიტის ამოკითხვის შემდეგ  ინფორმაცია ბუფერიდან უნდა გადადიოდეს გამომავალ ფაილში მყარ დისკზე.
-	 */
-	public static void CopyToFile(BufferedInputStream fis) {
+
+public static void CopyToFile(BufferedInputStream fis) {
 		OutputStream fos = null;
 		try {
 			byte[] bytes = new byte[3];
 			fos = new BufferedOutputStream(new FileOutputStream("D:\\TBC_Academy\\FileAndExceptions\\src\\CopiedText"));
-			while(fis.read()!= -1) {
-				fis.read(bytes);
-				fos.write(bytes);
-			}			
+//			fis.read()!= -1
+			while (fis.available() > 0) {
+				fos.write(fis.readNBytes(3));
+			}
 			fos.toString();
-		}catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("File not found: " + e);
-		}catch (IOException ioe) {
-           System.out.println("I/O Exception: " + ioe);
-       }finally {
-       	if(fis != null && fos != null) {
-       		try { 
-       			fis.close();
-       			fos.close();
-       		} catch (IOException e) {}
-       	}
-       	
-       }
+		} catch (IOException ioe) {
+			System.out.println("I/O Exception: " + ioe);
+		} finally {
+			if (fis != null && fos != null) {
+				try {
+					fis.close();
+					fos.close();
+				} catch (IOException e) {
+				}
+			}
+		}
 	}
 }
